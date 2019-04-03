@@ -1,5 +1,12 @@
-@()
+@import service.UserProvider
+@(userProvider: UserProvider)
 
-@main("Welcome to Play") {
-  <h1>Welcome to Play!</h1>
-}
+@main(userProvider, "Home") {
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Home</h1>
+
+      </div>
+
+
+    }

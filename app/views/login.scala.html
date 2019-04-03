@@ -1,0 +1,47 @@
+@import service.UserProvider
+@(playAuth: com.feth.play.module.pa.PlayAuthenticate, userProvider: UserProvider, loginForm: Form[_])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
+@import com.feth.play.module.pa.views.html._
+
+@main(userProvider, "Login","login") {
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-4">
+      <h1>Login</h1>
+    </div>
+  </div>
+
+  <div id="login" class="row">
+
+    <div class="col-xs-6 col-sm-4">
+      @* Display proprietary login form *@
+    	@helper.form(routes.Application.doLogin, 'class -> "form-horizontal", 'role -> "form") {
+        @helper.CSRF.formField
+        @if(loginForm.hasGlobalErrors) {
+          	<p class="alert alert-danger">
+	          @loginForm.getGlobalError.get.message
+	     	</p>
+        }
+
+        @_emailPartial(loginForm)
+
+        @inputPassword(
+          loginForm("password"),
+          '_showConstraints -> false,
+          '_label -> "password"
+        )
+
+            <button type="submit" class="btn btn-info">Login</button>
+
+        <a href="javascript:void(0);" onclick="window.location.href = jsRoutes.controllers.Signup.forgotPassword($('#email').val() || null).absoluteURL();">forgot.password</a>
+
+    	}
+    </div>
+
+
+  </div>
+
+}
+

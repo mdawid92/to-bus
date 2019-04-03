@@ -1,0 +1,30 @@
+@import service.UserProvider
+@(playAuth: com.feth.play.module.pa.PlayAuthenticate, userProvider: UserProvider, localUser: models.User = null)
+
+@import com.feth.play.module.pa.views.html._
+
+@main(userProvider, "Profile","profile") {
+
+    <h1>Profile</h1>
+    <p>
+    Your name is @localUser.name and your email address is @if(!localUser.email) {<em>&lt;unknown&gt;</em>.} else {
+    	@localUser.email.
+	    <i>
+	    @if(!localUser.emailValidated && localUser.email) {
+	      (<a href="@routes.Account.verifyEmail">unverified - click to verify</a>)
+	    } else {
+	      (verified)
+	    }</i>
+    }
+    <br />
+        @if(localUser.firstname && localUser.lasttname) {
+            Your first name is @localUser.firstname and your last name is @localUser.lasttname
+            <br/>
+        }
+
+
+    <ul>
+    	<li><a href="@routes.Account.changePassword">password_change</a></li>
+    </ul>
+    </p>
+}

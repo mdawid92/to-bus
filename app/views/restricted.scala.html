@@ -1,0 +1,10 @@
+@import service.UserProvider
+@(userProvider: UserProvider, localUser: models.User = null)
+
+@main(userProvider, "restricted", "restricted") {
+    
+    <h1>restricted</h1>
+    <p>
+        secrets
+    </p>
+}
