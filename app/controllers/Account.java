@@ -149,83 +149,22 @@ public class Account extends Controller {
 
     @SubjectPresent
     public Result askLink() {
-        com.feth.play.module.pa.controllers.Authenticate.noCache(response());
-        final AuthUser u = this.auth.getLinkUser(session());
-        if (u == null) {
-            // account to link could not be found, silently redirect to login
-            return redirect(routes.Application.index());
-        }
-        return ok(ask_link.render(this.userProvider, ACCEPT_FORM, u));
+        return ok("not implemented");
     }
 
     @SubjectPresent
     public Result doLink() {
-        com.feth.play.module.pa.controllers.Authenticate.noCache(response());
-        final AuthUser u = this.auth.getLinkUser(session());
-        if (u == null) {
-            // account to link could not be found, silently redirect to login
-            return redirect(routes.Application.index());
-        }
-
-        final Form<Accept> filledForm = ACCEPT_FORM.bindFromRequest();
-        if (filledForm.hasErrors()) {
-            // User did not select whether to link or not link
-            return badRequest(ask_link.render(this.userProvider, filledForm, u));
-        } else {
-            // User made a choice :)
-            final boolean link = filledForm.get().accept;
-            if (link) {
-                flash(Application.FLASH_MESSAGE_KEY,
-                        this.msg.preferred(request()).at("playauthenticate.accounts.link.success"));
-            }
-            return this.auth.link(ctx(), link);
-        }
+        return ok("not implemented");
     }
 
     @SubjectPresent
     public Result askMerge() {
-        com.feth.play.module.pa.controllers.Authenticate.noCache(response());
-        // this is the currently logged in user
-        final AuthUser aUser = this.auth.getUser(session());
-
-        // this is the user that was selected for a login
-        final AuthUser bUser = this.auth.getMergeUser(session());
-        if (bUser == null) {
-            // user to merge with could not be found, silently redirect to login
-            return redirect(routes.Application.index());
-        }
-
-        // You could also get the local user object here via
-        // User.findByAuthUserIdentity(newUser)
-        return ok(ask_merge.render(this.userProvider, ACCEPT_FORM, aUser, bUser));
+        return ok("not implemented");
     }
 
     @SubjectPresent
     public Result doMerge() {
-        com.feth.play.module.pa.controllers.Authenticate.noCache(response());
-        // this is the currently logged in user
-        final AuthUser aUser = this.auth.getUser(session());
-
-        // this is the user that was selected for a login
-        final AuthUser bUser = this.auth.getMergeUser(session());
-        if (bUser == null) {
-            // user to merge with could not be found, silently redirect to login
-            return redirect(routes.Application.index());
-        }
-
-        final Form<Accept> filledForm = ACCEPT_FORM.bindFromRequest();
-        if (filledForm.hasErrors()) {
-            // User did not select whether to merge or not merge
-            return badRequest(ask_merge.render(this.userProvider, filledForm, aUser, bUser));
-        } else {
-            // User made a choice :)
-            final boolean merge = filledForm.get().accept;
-            if (merge) {
-                flash(Application.FLASH_MESSAGE_KEY,
-                        this.msg.preferred(request()).at("playauthenticate.accounts.merge.success"));
-            }
-            return this.auth.merge(ctx(), merge);
-        }
+        return ok("not implemented");
     }
 
 }
