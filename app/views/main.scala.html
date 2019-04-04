@@ -26,47 +26,39 @@
 
     <body>
 
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-            <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        Toggle navigation
-                    </button>
-                    <a class="navbar-brand" href="@routes.Application.index()">TO-BUS</a>
-                </div>
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="@("active".when(nav == ""))"><a href="@routes.Application.index()">Home</a></li>
-                        <li class="@("active".when(nav == "restricted"))"><a href="@routes.Application.restricted()">restricted</a></li>
-
-
-                        @subjectNotPresent() {
-                            <li class="@("active".when(nav == "signup"))"><a href="@routes.Application.signup()">signup</a></li>
-                        }
-                    </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">TO-BUS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item @("active".when(nav == ""))"><a class="nav-link" href="@routes.Application.index()">Home</a></li>
+                    <li class="nav-item @("active".when(nav == "restricted"))"><a class="nav-link" href="@routes.Application.restricted()">restricted</a></li>
 
                     @subjectPresentOr() {
-                        <ul class="nav navbar-nav navbar-right">
                         @defining(userProvider.getUser(session())) { user =>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> @user.name <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li class="@("active".when(nav == "profile"))"><a href="@routes.Application.profile()">profile</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()"><i class="icon-off"></i>logout</a></li>
-                                </ul>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @user.name
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="@("active".when(nav == "profile")) dropdown-item" href="@routes.Application.profile()">profile</a>
+                                    <a class="dropdown-item" href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()"><i class="icon-off"></i>logout</a>
+                                </div>
                             </li>
                         }
-                        </ul>
                     } {
                         <a href="@routes.Application.login()" class=" navbar-right btn btn-default navbar-btn @("disabled".when(nav == "login"))">login</a>
                     }
 
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                    @subjectNotPresent() {
+                        <li class="nav-item @("active".when(nav == "signup"))"><a class="nav-link" href="@routes.Application.signup()">signup</a></li>
+                    }
+
+
+                </ul>
+            </div>
         </nav>
 
 
