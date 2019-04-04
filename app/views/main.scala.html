@@ -36,6 +36,17 @@
                     <li class="nav-item @("active".when(nav == ""))"><a class="nav-link" href="@routes.Application.index()">Home</a></li>
                     <li class="nav-item @("active".when(nav == "restricted"))"><a class="nav-link" href="@routes.Application.restricted()">restricted</a></li>
 
+                    @subjectPresent() {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="@("active".when(nav == "admin_dest")) dropdown-item" href="@routes.DestinationController.list()">destinations</a>
+                            </div>
+                        </li>
+                    }
+
                     @subjectPresentOr() {
                         @defining(userProvider.getUser(session())) { user =>
                             <li class="nav-item dropdown">
@@ -55,7 +66,6 @@
                     @subjectNotPresent() {
                         <li class="nav-item @("active".when(nav == "signup"))"><a class="nav-link" href="@routes.Application.signup()">signup</a></li>
                     }
-
 
                 </ul>
             </div>
