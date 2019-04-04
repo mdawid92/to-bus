@@ -29,11 +29,20 @@
                 '_label -> "Name"
              )
 
+             @inputText(
+                signupForm("firstname"),
+                '_label -> "First name"
+             )
+             @inputText(
+                signupForm("lastname"),
+                '_label -> "Last name"
+             )
+
              @_emailPartial(signupForm)
 
              @_passwordPartial(signupForm)
 
-            <button type="submit" class="btn btn-info">signup.now</button>
+            <button type="submit" class="btn btn-success">Signup now</button>
     	}
     </div>
 

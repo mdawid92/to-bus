@@ -105,6 +105,27 @@ public class MyUsernamePasswordAuthProvider
         @Required
         private String name;
 
+        @Required
+        private String firstname;
+        @Required
+        private String lastname;
+
+        public String getFirstname() {
+            return firstname;
+        }
+
+        public void setFirstname(String firstname) {
+            this.firstname = firstname;
+        }
+
+        public String getLastname() {
+            return lastname;
+        }
+
+        public void setLastname(String lastname) {
+            this.lastname = lastname;
+        }
+
         public String validate() {
             if (password == null || !password.equals(repeatPassword)) {
                 return "playauthenticate.password.signup.error.passwords_not_same";
