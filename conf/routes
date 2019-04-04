@@ -2,17 +2,12 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# An example controller showing a sample home page
-
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
-
 GET     /                           controllers.Application.index
 GET     /restricted                 controllers.Application.restricted
-GET     /assets/javascript/routes.js    controllers.Application.jsRoutes
-
 GET     /profile                    controllers.Application.profile
 
+
+# routes required by play-authenticate
 GET     /login                      controllers.Application.login
 POST    /login                      controllers.Application.doLogin
 
@@ -25,7 +20,6 @@ POST    /signup                     controllers.Application.doSignup
 GET     /accounts/unverified        controllers.Signup.unverified
 GET     /authenticate/:provider/denied     controllers.Signup.oAuthDenied(provider: String)
 
-GET     /accounts/verify/:token     controllers.Signup.verify(token: String)
 GET     /accounts/exists            controllers.Signup.exists
 
 GET     /accounts/password/reset/:token     controllers.Signup.resetPassword(token: String)
@@ -36,8 +30,6 @@ POST   /accounts/password/change    controllers.Account.doChangePassword
 
 GET     /accounts/verify            controllers.Account.verifyEmail
 
-GET     /accounts/add               controllers.Account.link
-
 GET     /accounts/link              controllers.Account.askLink
 POST    /accounts/link              controllers.Account.doLink
 
@@ -47,3 +39,9 @@ POST    /accounts/merge             controllers.Account.doMerge
 GET     /login/password/forgot     controllers.Signup.forgotPassword(email: String ?= "")
 POST    /login/password/forgot     controllers.Signup.doForgotPassword
 
+
+# jsRoutes
+GET     /assets/javascript/routes.js    controllers.Application.jsRoutes
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

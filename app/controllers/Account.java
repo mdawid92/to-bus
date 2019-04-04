@@ -95,12 +95,6 @@ public class Account extends Controller {
         this.msg = msg;
     }
 
-    @SubjectPresent
-    public Result link() {
-        com.feth.play.module.pa.controllers.Authenticate.noCache(response());
-        return ok(link.render(this.userProvider, this.auth));
-    }
-
     @Restrict(@Group(Application.USER_ROLE))
     public Result verifyEmail() {
         com.feth.play.module.pa.controllers.Authenticate.noCache(response());

@@ -55,11 +55,4 @@ public class MyUserService extends AbstractUserService {
         return newUser;
     }
 
-    @Override
-    public AuthUser update(final AuthUser knownUser) {
-        // User logged in again, bump last login date
-        User.setLastLoginDate(knownUser);
-        return knownUser;
-    }
-
 }

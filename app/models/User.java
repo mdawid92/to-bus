@@ -191,11 +191,6 @@ public class User extends Model implements Subject {
         u.save();
     }
 
-    public static void setLastLoginDate(final AuthUser knownUser) {
-        final User u = User.findByAuthUserIdentity(knownUser);
-        u.save();
-    }
-
     public static User findByEmail(final String email) {
         return getEmailUserFind(email).findOne();
     }

@@ -123,8 +123,6 @@ public class Signup extends Controller {
                     flash(Application.FLASH_MESSAGE_KEY,
                             this.msg.preferred(request()).at("playauthenticate.reset_password.message.email_not_verified"));
 
-                    // You might want to re-send the verification email here...
-//                    provider.sendVerifyEmailMailingAfterSignup(user, ctx());
                 }
             }
 
