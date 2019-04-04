@@ -217,7 +217,6 @@ public class MyUsernamePasswordAuthProvider
                         if (authUser.checkPassword(acc.providerUserId,
                                 authUser.getPassword())) {
                             // Password was correct
-                            System.out.println(authUser.getEmail());
                             return LoginResult.USER_LOGGED_IN;
                         } else {
                             // if you don't return here,
