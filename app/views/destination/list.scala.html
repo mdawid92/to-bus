@@ -3,31 +3,47 @@
 @(userProvider: UserProvider, destinations: util.List[Destination])
 
 @main(userProvider, "Admin destination", "admin_dest") {
-    <h1>Destination list</h1>
-
-    <div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">City</th>
-                    <th scope="col">Address</th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <h1>Destination list</h1>
+            </div>
+            <div class="col-2" style="text-align: right">
+                <a href="@routes.DestinationController.add()" class="btn btn-success" >Add</a>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
                 @for(destination <- destinations){
-                <tr>
-                    <th scope="row">@destination.getId</th>
-                    <td>@destination.getName</td>
-                    <td>@destination.getCity</td>
-                    <td>@destination.getAddress</td>
-                </tr>
-            }
-            </tbody>
-        </table>
+                    <tr>
+                        <th scope="row">@destination.getId</th>
+                        <td>@destination.getName</td>
+                        <td>@destination.getCity</td>
+                        <td>@destination.getAddress</td>
+                        <td>
+                            <a href="@routes.DestinationController.edit(destination.getId)" class="btn btn-info">Edit</a>
+                            <a href="@routes.DestinationController.delete(destination.getId)" class="btn btn-danger">Remove</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
 
+        </div>
     </div>
+
+
+
 
 
 }

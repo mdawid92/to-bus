@@ -1,0 +1,45 @@
+@import service.UserProvider
+@import java.util
+@(userProvider: UserProvider, addForm: Form[Destination], id: Long)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
+
+@main(userProvider, "Admin destination", "admin_dest") {
+    <h1>Destination add</h1>
+
+    <div id="add" class="row">
+
+        <div class="col-xs-6 col-md-4">
+
+            @helper.form(routes.DestinationController.doEdit(id), 'class -> "form-horizontal", 'role -> "form") {
+                @helper.CSRF.formField
+                @if(addForm.hasGlobalErrors) {
+                    <p class="alert alert-danger">
+                    @addForm.globalError.get.message
+                    </p>
+                }
+
+                @inputText(
+                    addForm("name"),
+                    '_label -> "Name"
+                )
+
+                @inputText(
+                    addForm("city"),
+                    '_label -> "City"
+                )
+                @inputText(
+                    addForm("address"),
+                    '_label -> "Address"
+                )
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            }
+        </div>
+
+
+    </div>
+
+
+}
