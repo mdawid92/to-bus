@@ -43,6 +43,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="@("active".when(nav == "admin_dest")) dropdown-item" href="@routes.DestinationController.list()">destinations</a>
+                                <a class="@("active".when(nav == "admin_bus")) dropdown-item" href="@routes.BusController.list()">bus</a>
+                                <a class="@("active".when(nav == "admin_trip")) dropdown-item" href="@routes.TripController.list()">trips</a>
                             </div>
                         </li>
                     }

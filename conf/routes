@@ -2,15 +2,32 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                           controllers.Application.index
-GET     /restricted                 controllers.Application.restricted
-GET     /profile                    controllers.Application.profile
-GET     /admin/destination          controllers.DestinationController.list
-GET     /admin/destination/add      controllers.DestinationController.add
-POST    /admin/destination/add      controllers.DestinationController.doAdd
+GET     /                               controllers.Application.index
+GET     /restricted                     controllers.Application.restricted
+GET     /profile                        controllers.Application.profile
+
+GET     /admin/destination              controllers.DestinationController.list
+GET     /admin/destination/add          controllers.DestinationController.add
+POST    /admin/destination/add          controllers.DestinationController.doAdd
 GET     /admin/destination/delete/:id   controllers.DestinationController.delete(id: Long)
-GET     /admin/destination/edit/:id   controllers.DestinationController.edit(id: Long)
-POST    /admin/destination/edit/:id   controllers.DestinationController.doEdit(id: Long)
+GET     /admin/destination/edit/:id     controllers.DestinationController.edit(id: Long)
+POST    /admin/destination/edit/:id     controllers.DestinationController.doEdit(id: Long)
+
+GET     /admin/bus                      controllers.BusController.list
+GET     /admin/bus/add                  controllers.BusController.add
+POST    /admin/bus/add                  controllers.BusController.doAdd
+GET     /admin/bus/delete/:id           controllers.BusController.delete(id: Long)
+GET     /admin/bus/edit/:id             controllers.BusController.edit(id: Long)
+POST    /admin/bus/edit/:id             controllers.BusController.doEdit(id: Long)
+
+
+GET     /admin/trip                     controllers.TripController.list
+GET     /admin/trip/add                 controllers.TripController.add
+POST    /admin/trip/add                 controllers.TripController.doAdd
+GET     /admin/trip/delete/:id          controllers.TripController.delete(id: Long)
+GET     /admin/trip/edit/:id            controllers.TripController.edit(id: Long)
+POST    /admin/trip/edit/:id            controllers.TripController.doEdit(id: Long)
+
 
 
 # routes required by play-authenticate

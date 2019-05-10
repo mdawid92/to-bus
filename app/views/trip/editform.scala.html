@@ -1,0 +1,53 @@
+@import service.UserProvider
+@import java.util
+@(userProvider: UserProvider, addForm: Form[Trip], destinations: util.List[Destination], buses: util.List[Bus], id: Long)
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
+
+@main(userProvider, "Admin trip", "admin_trip") {
+    <h1>Destination add</h1>
+
+    <div id="add" class="row">
+
+        <div class="col-xs-6 col-md-4">
+
+            @helper.form(routes.TripController.doEdit(id), 'class -> "form-horizontal", 'role -> "form") {
+                @helper.CSRF.formField
+                @if(addForm.hasGlobalErrors) {
+                    <p class="alert alert-danger">
+                    @addForm.globalError.get.message
+                    </p>
+                }
+
+                @inputDate(
+                    addForm("date"),
+                    '_label -> "Date"
+                )
+
+                @select(
+                    addForm("start.id"),
+                    destinations.map(d=>(d.getId.toString, d.getName)),
+                    '_label -> "Start"
+                )
+                @select(
+                    addForm("stop.id"),
+                    destinations.map(d=>(d.getId.toString, d.getName)),
+                    '_label -> "Stop"
+                )
+
+                @select(
+                    addForm("bus.id"),
+                    buses.map(d=>(d.getId.toString, d.getName)),
+                    '_label -> "Stop"
+                )
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            }
+        </div>
+
+
+    </div>
+
+
+}
