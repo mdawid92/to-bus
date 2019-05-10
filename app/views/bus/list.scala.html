@@ -1,0 +1,47 @@
+@import service.UserProvider
+@import java.util
+@(userProvider: UserProvider, destinations: util.List[Bus])
+
+@main(userProvider, "Admin bus", "admin_bus") {
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <h1>Bus list</h1>
+            </div>
+            <div class="col-2" style="text-align: right">
+                <a href="@routes.BusController.add()" class="btn btn-success" >Add</a>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Seats</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @for(bus <- destinations){
+                    <tr>
+                        <th scope="row">@bus.getId</th>
+                        <td>@bus.getName</td>
+                        <td>@bus.getSeats</td>
+                        <td>
+                            <a href="@routes.BusController.edit(bus.getId)" class="btn btn-info">Edit</a>
+                            <a href="@routes.BusController.delete(bus.getId)" class="btn btn-danger">Remove</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+
+}
