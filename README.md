@@ -1,7 +1,7 @@
 # to-bus
 Technologie obiektowe 2
 
-Documentation on wiki page.
+Documentation on [wiki](https://github.com/mdawid92/to-bus/wiki) page.
 
 Project use Play framework and PostgreSQL database.
 
