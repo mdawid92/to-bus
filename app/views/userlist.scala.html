@@ -1,0 +1,41 @@
+@import service.UserProvider
+@import java.util
+@(userProvider: UserProvider, trips: util.List[Trip])
+
+@main(userProvider, "Admin trip", "admin_trip") {
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <h1>Trip list</h1>
+        </div>
+        <div class="col-2" style="text-align: right">
+            <a href="@routes.TripController.search()" class="btn btn-success" >Search</a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Start</th>
+                <th scope="col">Stop</th>
+                <th scope="col">Date</th>
+                <th scope="col">Bus</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for(trip <- trips){
+            <tr>
+                <th scope="row">@trip.getId</th>
+                <td>@trip.getStart.getName</td>
+                <td>@trip.getStop.getName</td>
+                <td>@trip.getDate</td>
+                <td>@trip.getBus.getName</td>
+            </tr>
+            }
+            </tbody>
+        </table>
+
+    </div>
+</div>
