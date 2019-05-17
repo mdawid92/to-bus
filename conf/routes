@@ -3,7 +3,9 @@
 # ~~~~
 
 GET     /                               controllers.Application.index
-GET     /restricted                     controllers.Application.restricted
+GET     /trip                           controllers.Application.trip
+GET     /trip/search                    controllers.TripController.search
+POST    /trip/search                    controllers.TripController.doSearch
 GET     /profile                        controllers.Application.profile
 
 GET     /admin/destination              controllers.DestinationController.list
