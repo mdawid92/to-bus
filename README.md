@@ -1,6 +1,10 @@
 # to-bus
 Technologie obiektowe 2
 
+Documentation on wiki page.
+
+Project use Play framework and PostgreSQL database.
+
 ## to run 
 
 ```bash
