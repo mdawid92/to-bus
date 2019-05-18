@@ -3,6 +3,7 @@ package controllers;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
 import com.feth.play.module.pa.PlayAuthenticate;
+import models.Trip;
 import models.User;
 import play.data.Form;
 import play.mvc.Controller;
@@ -13,9 +14,13 @@ import providers.MyUsernamePasswordAuthProvider.MySignup;
 import service.UserProvider;
 import views.html.*;
 
+
+
 import javax.inject.Inject;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 public class Application extends Controller {
 
@@ -49,6 +54,12 @@ public class Application extends Controller {
     public Result restricted() {
         final User localUser = this.userProvider.getUser(session());
         return ok(restricted.render(this.userProvider, localUser));
+    }
+    @Restrict(@Group(Application.USER_ROLE))
+    public Result trip() {
+        List<Trip> all = Trip.find.all();
+        all.sort(Comparator.comparingLong(Trip::getId));
+        return ok(userlist.render(this.userProvider, all));
     }
 
     @Restrict(@Group(Application.USER_ROLE))

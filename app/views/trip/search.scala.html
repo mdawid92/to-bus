@@ -1,0 +1,45 @@
+@import service.UserProvider
+@import java.util
+@(userProvider: UserProvider, addForm: Form[Search])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapBasic.f) }
+
+@main(userProvider, "Admin trip", "admin_trip") {
+<h1>Search</h1>
+
+<div id="add" class="row">
+
+    <div class="col-xs-6 col-md-4">
+
+        @helper.form(routes.TripController.doSearch, 'class -> "form-horizontal", 'role -> "form") {
+        @helper.CSRF.formField
+        @if(addForm.hasGlobalErrors) {
+        <p class="alert alert-danger">
+            @addForm.globalError.get.message
+        </p>
+        }
+
+
+
+            @inputText(
+            addForm("start"),
+            '_label -> "Start"
+            )
+
+            @inputText(
+            addForm("stop"),
+            '_label -> "Stop"
+            )
+
+
+
+        <button type="submit" class="btn btn-success">Submit</button>
+        }
+    </div>
+
+
+</div>
+
+
+}

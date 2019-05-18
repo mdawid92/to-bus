@@ -5,6 +5,7 @@ import be.objectify.deadbolt.java.actions.Restrict;
 import models.Bus;
 import models.Destination;
 import models.Trip;
+import models.Search;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
@@ -13,10 +14,14 @@ import service.UserProvider;
 import views.html.trip.editform;
 import views.html.trip.form;
 import views.html.trip.list;
+import views.html.trip.search;
+import views.html.userlist;
 
 import javax.inject.Inject;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class TripController extends Controller {
     private final UserProvider userProvider;
@@ -55,6 +60,31 @@ public class TripController extends Controller {
         }
 
     }
+    @Restrict(@Group(Application.USER_ROLE))
+    public Result search() {
+        Form<Search> addForm = formFactory.form(Search.class).bindFromRequest();
+        List<Destination> destinations = Destination.find.all();
+        List<Bus> buses = Bus.find.all();
+
+        return ok(search.render(this.userProvider, addForm));
+
+    }
+    @Restrict(@Group(Application.USER_ROLE))
+    public Result doSearch() {
+        Form<Search> addForm = formFactory.form(Search.class).bindFromRequest();
+        List<Trip> trips = Trip.find.all();
+        List<Trip> tripy = new ArrayList<Trip>();
+        Search search = addForm.get();
+        for (int i = 0; i<trips.size(); i++) {
+            Trip tr = trips.get(i);
+            Destination dt = tr.getStart();
+            Destination td = tr.getStop();
+            if (dt.getName().equals(search.getStart()) && td.getName().equals(search.getStop())){
+                tripy.add(tr);
+            }
+        }
+        return ok(userlist.render(this.userProvider, tripy));
+        }
 
     @Restrict(@Group(Application.USER_ROLE))
     public Result add() {
