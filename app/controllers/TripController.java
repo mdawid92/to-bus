@@ -73,18 +73,22 @@ public class TripController extends Controller {
     public Result doSearch() {
         Form<Search> addForm = formFactory.form(Search.class).bindFromRequest();
         List<Trip> trips = Trip.find.all();
-        List<Trip> tripy = new ArrayList<Trip>();
         Search search = addForm.get();
-        for (int i = 0; i<trips.size(); i++) {
-            Trip tr = trips.get(i);
+        List<Trip> tripy = getTrips(trips, search);
+        return ok(userlist.render(this.userProvider, tripy));
+        }
+
+    static List<Trip> getTrips(List<Trip> trips, Search search) {
+        List<Trip> tripy = new ArrayList<>();
+        for (Trip tr : trips) {
             Destination dt = tr.getStart();
             Destination td = tr.getStop();
-            if (dt.getName().equals(search.getStart()) && td.getName().equals(search.getStop())){
+            if (dt.getName().equals(search.getStart()) && td.getName().equals(search.getStop())) {
                 tripy.add(tr);
             }
         }
-        return ok(userlist.render(this.userProvider, tripy));
-        }
+        return tripy;
+    }
 
     @Restrict(@Group(Application.USER_ROLE))
     public Result add() {
